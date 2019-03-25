@@ -4,3 +4,5 @@ password = Rails.application.credentials.shopify_password
 shop_name = 'stephen-baidu-dev'
 shop_url = "https://#{api_key}:#{password}@#{shop_name}.myshopify.com/admin"
 ShopifyAPI::Base.site = shop_url
+
+::ShopifyClient = ShopifyAPI::GraphQL.new unless Rails.env.test?
