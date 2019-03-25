@@ -22,7 +22,7 @@
           <td><%= order.created_at %></td>
           <td><%= order.confirmed %></td>
           <td><%= order.processed_at %></td>
-          <td><%= order_price(order) %></td>
+          <td><%= money_to_s(order.total_price_set.shop_money) %></td>
         </tr>
       <% end %>
     </tbody>

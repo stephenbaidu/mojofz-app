@@ -4,4 +4,5 @@ Rails.application.routes.draw do
 
   resources :orders, only: :index
   resources :customers, only: :index
+  resources :products, only: :index
 end
