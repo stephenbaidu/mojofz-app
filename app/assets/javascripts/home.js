@@ -2,13 +2,13 @@
 // All this logic will automatically be available in application.js.
 
 $( document ).ready(function() {
-  var ctx = document.getElementById("myChart");
-  var myChart = new Chart(ctx, {
+  var chartElement = document.getElementById("profitEvolutionChart");
+  var profitEvolutionChart = new Chart(chartElement, {
     type: 'line',
     data: {
-      labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      labels: [],
       datasets: [{
-        data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
+        data: [],
         lineTension: 0,
         backgroundColor: 'transparent',
         borderColor: '#007bff',
@@ -29,4 +29,20 @@ $( document ).ready(function() {
       }
     }
   });
+
+  function updateChart (data) {
+    profitEvolutionChart.data.labels = data.labels;
+    profitEvolutionChart.data.datasets[0].data = data.data;
+    profitEvolutionChart.update();
+  }
+  
+  function fetchNewData () {
+    $.get("/profit_evolution", function (data) {
+      updateChart(data)
+    })
+  }
+
+  fetchNewData();
+
+  setInterval(fetchNewData, 1000 * 60 * 5);
 });
