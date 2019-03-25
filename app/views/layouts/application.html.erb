@@ -6,7 +6,7 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_link_tag params[:controller] if ::Rails.application.assets.find_asset("#{params[:controller]}.css") %>
+    <%= stylesheet_link_tag params[:controller] if (Rails.application.assets || ::Sprockets::Railtie.build_environment(Rails.application)).find_asset("#{params[:controller]}.css") %>
   </head>
 
   <body>
@@ -61,6 +61,6 @@
     <!-- Graphs -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 
-    <%= javascript_include_tag params[:controller] if ::Rails.application.assets.find_asset("#{params[:controller]}.js") %>
+    <%= javascript_include_tag params[:controller] if (Rails.application.assets || ::Sprockets::Railtie.build_environment(Rails.application)).find_asset("#{params[:controller]}.js") %>
   </body>
 </html>
