@@ -1,20 +1,5 @@
 module Shopify
   class Customers < ServiceBase
-    CUSTOEMRS_QUERY = ShopifyClient.parse <<-'GRAPHQL'
-      {
-        customers(first: 5) {
-          edges {
-            node {
-              displayName
-              email
-              phone
-              note
-            }
-          }
-        }
-      }
-    GRAPHQL
-
     def call
       customers.edges.map(&:node)
     end
@@ -22,7 +7,7 @@ module Shopify
     private
 
     def query_result
-      @query_result ||= ShopifyClient.query(CUSTOEMRS_QUERY)
+      @query_result ||= Queries::CLIENT.query(Queries::CUSTOMERS_QUERY)
     end
 
     def customers

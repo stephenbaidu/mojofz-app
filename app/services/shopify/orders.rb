@@ -1,26 +1,5 @@
 module Shopify
   class Orders < ServiceBase
-    ORDERS_QUERY = ShopifyClient.parse <<-'GRAPHQL'
-      {
-        orders(first: 5) {
-          edges {
-            node {
-              name
-              confirmed
-              createdAt
-              processedAt
-              totalPriceSet {
-                shopMoney {
-                  amount
-                  currencyCode
-                }
-              }
-            }
-          }
-        }
-      }
-    GRAPHQL
-
     def call
       orders.edges.map(&:node)
     end
@@ -28,7 +7,7 @@ module Shopify
     private
 
     def query_result
-      @query_result ||= ShopifyClient.query(ORDERS_QUERY)
+      @query_result ||= Queries::CLIENT.query(Queries::ORDERS_QUERY)
     end
 
     def orders
