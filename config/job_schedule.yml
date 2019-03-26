@@ -1,0 +1,4 @@
+first_minute_of_every_hour:
+  queue: "shopify"
+  cron: "0 */1 * * *"
+  class: "ShopifyProfitDataJob"
