@@ -32,5 +32,10 @@ module MojofzApp
 
     # Active job backend
     config.active_job.queue_adapter = :sidekiq
+
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Flash
+    config.middleware.use Rack::MethodOverride
+    config.middleware.use ActionDispatch::Session::CookieStore, { key: '_mojofz_app_session' }
   end
 end
