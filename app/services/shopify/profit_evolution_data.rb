@@ -11,7 +11,7 @@ module Shopify
     private
 
     def revenue
-      @revenue ||= 2000
+      @revenue ||= RevenueService.call
     end
   end
 end

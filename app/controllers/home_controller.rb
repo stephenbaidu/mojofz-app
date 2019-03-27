@@ -3,7 +3,7 @@ class HomeController < ApplicationController
   end
 
   def profit_evolution
-    result = Shopify::ProfitEvolution.call
+    result = Shopify::ProfitEvolutionService.call
     data = {
       labels: result.map { |e| e[:time] },
       data: result.map { |e| e[:profit] }
